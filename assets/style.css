@@ -1,0 +1,58 @@
+body {
+  background: linear-gradient(to bottom, #ffcccc 0%, #ccffcc 33%, #ccccff 66%);
+  background-repeat: no-repeat;
+}
+.listsAndForm {
+  border: solid 2px black;
+  padding: 50px;
+}
+a {
+  text-decoration: none;
+}
+#formSignIn,
+#formSignUp {
+  width: fit-content;
+}
+
+input:hover,
+a:hover {
+  background-color: #ffcccc;
+}
+.svg {
+  width: 55%;
+  min-height: 33%;
+}
+
+@media screen and (max-width: 600px) {
+  .d-flex {
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  .svg {
+    display: none;
+  }
+}
+.none {
+  display: none !important;
+}
+
+#message,
+.message {
+  display: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+.succes {
+  display: block !important;
+  color: green;
+  background-color: #acffac;
+  border: 3px solid green;
+}
+.echec {
+  display: block !important;
+  color: red;
+  background-color: #ffacac;
+  border: 3px solid red;
+}
