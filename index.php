@@ -12,13 +12,47 @@
 </head>
 
 <!-- add class "none" by JS to hide the section -->
-<div id="sectionSignIn" class="d-flex p-4 "> 
+<div id="sectionSignIn" class="d-flex p-4 none ">
     <?php
     include './signIn.php';
     ?>
 </div>
-<div id="sectionSignUp" class="d-flex p-4">
+<div id="sectionSignUp" class="d-flex p-4 none">
     <?php
     include './signUp.php';
     ?>
 </div>
+
+
+
+
+
+<!-- Just change if ($_SESSION['connected'])  to be ok -->
+<?php if ($_SESSION['connected'] = true) { ?>
+
+    <div>
+        <?php
+        include './components/navbar.php';
+        ?>
+    </div>
+    <div class="p-5 d-flex  justify-content-between none ">
+        <?php
+        include './components/createTask.php';
+        include './components/myTasks.php';
+        ?>
+    </div>
+
+    <div id="sectionMyAccount" class="p-4 p-5 d-flex align-items-center justify-content-between ">
+    <?php
+    include './components/myAccount.php';
+    ?>
+</div>
+
+<?php } else {
+?>
+    <div id="sectionSignIn" class="d-flex p-4  ">
+        <?php
+        include './signIn.php';
+        ?>
+    </div>
+<?php } ?>

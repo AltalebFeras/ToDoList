@@ -10,7 +10,7 @@ a {
   text-decoration: none;
 }
 #formSignIn,
-#formSignUp {
+#formSignUp,#createNewTaskForm {
   width: fit-content;
 }
 
@@ -32,9 +32,18 @@ a:hover {
   .svg {
     display: none;
   }
+  #listOfTasks{
+    max-width: 300px;
+    }
 }
 .none {
   display: none !important;
+}
+/* textarea {
+  resize: none;
+} */
+#listOfTasks{
+min-width: 255px;
 }
 
 #message,

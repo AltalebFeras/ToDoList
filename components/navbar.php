@@ -1,13 +1,33 @@
+<div id="navbar" class="mt-5" >
+    <!-- Just change if ($_SESSION['connected'])  to be ok -->
+    <?php if ($_SESSION['connected'] = true) { ?>
 
 
-<div id="header">
-        <?php if (isset($_SESSION['connecté'])) { ?>
-            <a href="/signOut.php" class=" badge rounded-pill  text-white bg-dark mb-3 mx-2">Sign out</a>
-            <a href="#" class=" badge rounded-pill  text-white bg-dark mb-3 mx-2" >home</a>
-        <?php } else { ?>
-            <nav class="mt-2 navbar navbar-dark bg-secondary">
-                <a href="/signIn.php" class=" badge rounded-pill  text-white bg-dark mb-3 mx-2">Sign in</a>
-                <a href="/signUp.php" class="badge rounded-pill  text-white bg-dark mb-3 mx-2">Sign up</a>
-            </nav>
-        <?php } ?>
-    </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid ">
+                <a class="navbar-brand " href="#">My account</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse  justify-content-between" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">My tasks</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/signOut.php">Sign out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    <?php } else { ?>
+        <div id="sectionSignIn" class="d-flex p-4">
+            <?php
+            include './signIn.php';
+            ?>
+        </div>
+    <?php } ?>
+</div>
