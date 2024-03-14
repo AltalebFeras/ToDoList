@@ -19,7 +19,7 @@
    <label for="surname">Surname :*</label>
    <input id="surname" type="text" name="surname" class="mb-3 mx-2" minlength="3" maxlength="50" placeholder="Enter your surname" required>
 
-   <label for="email">Email :*</label> <!-- i have to change the username to email  -->
+   <label for="email">Email :*</label> 
    <input id="email" type="text" name="email" class="mb-3 mx-2" minlength="3" maxlength="80" placeholder="Enter your email" required>
 
    <label for="password">password :*</label>
