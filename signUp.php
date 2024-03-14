@@ -11,7 +11,9 @@
 <div>
 <h3 class="my-2 px-5 py-2 p-3 mb-2  text-dark ">Sign Up</h3>
 
-<form id="formSignUp" class="d-flex flex-column bd-highlight mb-3 form-control" method="post" action="src/treatment.php" onsubmit="return Validation()">
+<form id="formSignUp" class="d-flex flex-column bd-highlight mb-3 form-control" method="post" action="treatmentSignUp.php">
+
+      <div id="message" ></div>
 
    <label for="name">Name :*</label>
    <input id="name" type="text" name="name" class="mb-3 mx-2" minlength="3" maxlength="50" placeholder="Enter your name" required>
@@ -28,6 +30,6 @@
    <label for="passwordVerify">Verify your password :*</label>
    <input type="password" id="passwordVerify" name="passwordVerify" class="mb-3 mx-2"  minlength="7" placeholder="cofirme your password" required>
 
-   <input type="submit" name="submit" value="sign up" class="mb-3 mx-2">
+   <input id="buttonFormSignUp" type="submit" name="submit" value="sign up" class="mb-3 mx-2">
 </form>
 </div>

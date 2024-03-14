@@ -1,13 +1,13 @@
 <?php
 
-final class Database
+class Database
 {
   private $DB;
   private $config;
 
   public function __construct()
   {
-    $this->config = __DIR__ . '/../../config.php';
+    $this->config = __DIR__ . '/../config.php';
     require_once $this->config;
 
     try {
