@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,35 +12,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/style.css">
-    <script src="./assets/scriptConnection.js" async></script>
+    <script src="./assets/scriptConnection.js" defer></script>
 
 </head>
 
-<!-- add class "none" by JS to hide the section -->
-<div id="sectionSignIn" class="d-flex p-4 none ">
-    <?php
-    include './signIn.php';
-    ?>
-</div>
-<div id="sectionSignUp" class="d-flex p-4 ">
-    <?php
-    include './signUp.php';
-    ?>
-</div>
-
-
-
-
-
-<!-- Just change if ($_SESSION['connected'])  to be ok -->
-<?php if ($_SESSION['connected'] = true) { ?>
+<?php 
+ if (isset($_SESSION['connected']) && $_SESSION['connected']) { ?>
     
-    <div  class="none" >
+    <div>
         <?php
         include './components/navbar.php';
         ?>
     </div>
-    <div class="p-5 d-flex  justify-content-between none  ">
+    <div id="sectionMyTasks"  class="p-5 d-flex  justify-content-between   ">
         <?php
         include './components/createTask.php';
         include './components/myTasks.php';
@@ -56,5 +44,10 @@
         include './signIn.php';
         ?>
     </div>
+    <div id="sectionSignUp" class="d-flex p-4 none">
+    <?php
+    include './signUp.php';
+    ?>
+</div>
     <?php } ?>
     

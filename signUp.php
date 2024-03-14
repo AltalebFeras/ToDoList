@@ -11,7 +11,7 @@
 <div>
 <h3 class="my-2 px-5 py-2 p-3 mb-2  text-dark ">Sign Up</h3>
 
-<form id="formSignUp" class="d-flex flex-column bd-highlight mb-3 form-control" method="post" action="treatmentSignUp.php">
+<form id="formSignUp" class="d-flex flex-column bd-highlight mb-3 form-control" method="post" action="treatmentSignUp.php" >
 
       <div id="message" ></div>
 

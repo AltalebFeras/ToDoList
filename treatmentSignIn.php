@@ -1,70 +1,59 @@
 <?php
 session_start();
-require_once 'config.php';
-
-// Establishing connection to the database
-$servername = "localhost"; // Assuming localhost
-$dbusername = "todolist"; // Replace with your database username
-$dbpassword = "1234"; // Replace with your database password
-$dbname = "todolist"; // Replace with your database name
-
-// Create connection
-$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once __DIR__ . "/src/Classes/User.php";
+require_once __DIR__ . "/src/Repositories/UserRepository.php";
+require_once __DIR__ . "/src/Classes/Database.php";
 
 if (
-    isset($_POST['userName']) &&
+    isset($_POST['email']) &&
     isset($_POST['password']) &&
-    !empty($_POST['userName']) &&
+    !empty($_POST['email']) &&
     !empty($_POST['password'])
 ) {
-    $userName = htmlspecialchars($_POST['userName']);
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
+    // Establish database connection
+    $db = new Database();
+    $conn = $db->getDB(); // Corrected method name
+
     // Prepare SQL statement to fetch user data
-    $sql = "SELECT * FROM user WHERE userName = ?";
-    $stmt = $conn->prepare($sql);
+    $request = "SELECT * FROM todo_user WHERE email = ?";
+    $stmt = $conn->prepare($request);
 
     // Bind parameters
-    $stmt->bind_param("s", $userName);
+    $stmt->bindValue(1, $email); // Use bindValue() instead of bind_param()
 
     // Execute the prepared statement
-    $stmt->execute();
+   // Execute the prepared statement
+$stmt->execute();
 
-    // Get the result
-    $result = $stmt->get_result();
+// Fetch the result
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Check if user exists
-    if ($result->num_rows == 1) {
-        $row = $result->fetch_assoc();
-        // Verify password
-        if (password_verify($password, $row['password'])) {
-            // Password is correct, start session and redirect to treatment script
-            $_SESSION['user'] = $userName;
-            $_SESSION['connected'] = true;
-            header('location:../index.php');
-            exit;
-        } else {
-            // Password is incorrect
-            header('location:../index.php?error=password_incorrect');
-            
-            exit;
-        }
+// Check if user exists
+if ($row) {
+    // Verify password
+    if (password_verify($password, $row['password'])) {
+        // Password is correct, start session and redirect to treatment script
+        $_SESSION['user'] = $email;
+        $_SESSION['connected'] = true;
+        header('location:../index.php');
+        exit;
     } else {
-        // User not found
-        header('location:../index.php?error=user_not_found');
+        // Password is incorrect
+        header('location:../index.php?error=password_incorrect');
         exit;
     }
-
-    // Close statement
-    $stmt->close();
+} else {
+    // User not found
+    header('location:../index.php?error=user_not_found');
+    exit;
+}
 
 } else {
     // Redirect if fields are empty
     header('location:../index.php?error=empty_fields');
     exit;
 }
+?>
