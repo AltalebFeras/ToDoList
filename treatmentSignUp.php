@@ -8,21 +8,28 @@ if (
     isset($_POST['name']) &&
     isset($_POST['surname']) &&
     isset($_POST['email']) &&
-    isset($_POST['password']) 
+    isset($_POST['password']) &&
+    isset($_POST['passwordVerify'])
 ) {
     $name = htmlspecialchars($_POST['name']);
     $surname = htmlspecialchars($_POST['surname']);
     $email = htmlspecialchars($_POST['email']);
-    $password = $_POST['password']; // No need for htmlspecialchars here
+    $password = $_POST['password']; 
+    $passwordVerify = $_POST['passwordVerify']; 
 
-    // Hash the password using bcrypt
+     // Verify password confirmation
+     if ($password !== $passwordVerify) {
+        echo "Passwords do not match. Please try again."; // Or display an error message in your HTML
+        exit; // Stop further execution if passwords don't match
+    }
+   
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $newUser = new User(
         $name,
         $surname,
         $email,
-        $hashedPassword // Store the hashed password instead of the plain text
+        $hashedPassword 
     );
 
     $userRepository = new UserRepository();

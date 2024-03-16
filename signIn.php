@@ -2,21 +2,9 @@
 
 // session_start();
 
-$succes = null;
-$echec = null;
-if (isset($_GET['succes']) && $_GET['succes'] === "signUp") {
-  $succes = true;
-}
-if (isset($_GET['erreur'])) {
-  $echec = true;
-}
+
 ?>
 
-<?php if ($succes) { ?>
-  <div class="message succes">
-    Your inscription is activate !
-  </div>
-<?php } ?>
 
 <div>
   <h2 class=" py-2  fs-4 fw-bold">The smart to-do app for busy people</h2>
@@ -30,6 +18,7 @@ if (isset($_GET['erreur'])) {
   </div>
   <form id="formSignIn" method="post" class="d-flex flex-column bd-highlight mb-3 form-control" 
   action="treatmentSignIn.php" >
+  
 
     <label for="email">Email :*</label>
     <!-- i have to change the username to email  -->
