@@ -2,19 +2,26 @@
 
 class Task
 {
+    private $taskID;
     private $taskTitle;
     private $taskDescription;
     private $taskDeadline;
     private $taskPriority;
     private $taskCategory;
 
-    public function __construct($taskTitle, $taskDescription, $taskDeadline, $taskPriority, $taskCategory)
+    public function __construct($taskID, $taskTitle, $taskDescription, $taskDeadline, $taskPriority, $taskCategory)
     {
+        $this->taskID = $taskID;
         $this->taskTitle = $taskTitle;
         $this->taskDescription = $taskDescription;
         $this->taskDeadline = $taskDeadline;
         $this->taskPriority = $taskPriority;
         $this->taskCategory = $taskCategory;
+    }
+
+    public function getTaskID()
+    {
+        return $this->taskID;
     }
 
     public function getTaskTitle()
@@ -64,5 +71,17 @@ class Task
     public function setTaskCategory($taskCategory)
     {
         $this->taskCategory = $taskCategory;
+    }
+
+    public function toAssociativeArray()
+    {
+        return [
+            "taskID" => $this->taskID,
+            "taskTitle" => $this->taskTitle,
+            "taskDescription" => $this->taskDescription,
+            "taskDeadline" => $this->taskDeadline,
+            "taskPriority" => $this->taskPriority,
+            "taskCategory" => $this->taskCategory
+        ];
     }
 }

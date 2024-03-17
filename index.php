@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+require_once "./src/Repositories/UserRepository.php";
+
+$userRepository = new UserRepository();
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +35,7 @@ session_start();
         ?>
     </div>
     
-    <div id="sectionMyAccount" class="p-4 p-5 d-flex align-items-center justify-content-between none ">
+    <div id="sectionMyAccount" class="p-4 p-5 d-flex align-items-center justify-content-between  ">
         <?php
     include './components/myAccount.php';
     ?>

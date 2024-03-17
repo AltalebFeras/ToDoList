@@ -26,6 +26,7 @@ if (
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $newUser = new User(
+        $userID,
         $name,
         $surname,
         $email,

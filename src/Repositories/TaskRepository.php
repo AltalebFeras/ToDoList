@@ -13,6 +13,7 @@
 
             foreach ($data as $task) {
                 $newTask = new Task(
+                    $task["taskID"],
                     $task['taskTitle'],
                     $task['taskDescription'],
                     $task['taskDeadline'],
@@ -29,10 +30,11 @@
         public function create($newTask)
         {
             // Inserting the task
-            $request = 'INSERT INTO todo_task (taskTitle, taskDescription, taskDeadline, taskPriority, taskCategory) VALUES (?, ?, ?, ?, ?)';
+            $request = 'INSERT INTO todo_task (taskID,taskTitle, taskDescription, taskDeadline, taskPriority, taskCategory) VALUES (?,?, ?, ?, ?, ?)';
             $query = $this->getDb()->prepare($request);
         
             $query->execute([
+                $newTask->getTaskID(),
                 $newTask->getTaskTitle(),
                 $newTask->getTaskDescription(),
                 $newTask->getTaskDeadline(),
@@ -52,4 +54,33 @@
             $queryPriority->execute([$newTask->getTaskPriority(), $newTask->getTaskPriority()]);
         }
         
+        
+        public function update($task)
+        {
+            $request = 'UPDATE todo_task SET taskID = :taskID, getTaskTitle = :getTaskTitle, taskDescription = :taskDescription, taskDeadline = :taskDeadline, taskPriority , = :taskPriority ,taskCategory = :taskCategory  WHERE userID = :userID';
+
+            $query = $this->getDb()->prepare($request);
+
+            $query->execute([
+                'taskID' => $task->getTaskID(),
+                'getTaskTitle' => $task->getTaskTitle(),
+                'taskDescription' => $task->getTaskDescription(),
+                'taskDeadline' => $task->getTaskDeadline(),
+                'taskPriority ,' => $task->getTaskPriority(),
+                'taskCategory' => $task->getTaskCategory(),
+
+            ]);
+        }
+
+        public function delete($taskID)
+        {
+            $request = 'DELETE FROM todo_task WHERE taskID = :taskID';
+
+            $query = $this->getDb()->prepare($request);
+
+            $query->execute([
+                'taskID' => $taskID
+            ]);
+        }
+
     }
