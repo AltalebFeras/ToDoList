@@ -47,11 +47,10 @@ min-width: 255px;
 }
 
 
-.message {
-  display: none;
-  padding: 10px 15px;
-  border-radius: 10px;
-  margin-bottom: 15px;
+#message {
+width:  fit-content;
+ background-color: aquamarine;
+  
 }
 .succes {
   display: block !important;

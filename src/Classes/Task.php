@@ -9,7 +9,11 @@ class Task
     private $taskPriority;
     private $taskCategory;
 
-    public function __construct($taskID, $taskTitle, $taskDescription, $taskDeadline, $taskPriority, $taskCategory)
+    private $userTaskID;
+
+    private $priorityID;
+
+    public function __construct($taskTitle, $taskDescription, $taskDeadline, $taskPriority, $taskCategory, $userTaskID, $priorityID, $taskID = null)
     {
         $this->taskID = $taskID;
         $this->taskTitle = $taskTitle;
@@ -17,6 +21,8 @@ class Task
         $this->taskDeadline = $taskDeadline;
         $this->taskPriority = $taskPriority;
         $this->taskCategory = $taskCategory;
+        $this->userTaskID = $userTaskID;
+        $this->priorityID = $priorityID;
     }
 
     public function getTaskID()
@@ -72,6 +78,34 @@ class Task
     {
         $this->taskCategory = $taskCategory;
     }
+
+
+
+    public function getUserTaskID()
+    {
+        return $this->userTaskID;
+    }
+
+
+    public function setUserTaskID($userTaskID): self
+    {
+        $this->userTaskID = $userTaskID;
+
+        return $this;
+    }
+
+    public function getPriorityID()
+    {
+        return $this->priorityID;
+    }
+
+    public function setPriorityID($priorityID): self
+    {
+        $this->priorityID = $priorityID;
+
+        return $this;
+    }
+
 
     public function toAssociativeArray()
     {

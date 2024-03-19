@@ -1,11 +1,10 @@
 <?php
 
-require_once __DIR__ . "/src/Classes/User.php";
-require_once __DIR__ . "/src/Repositories/UserRepository.php";
+require_once __DIR__ . "/../Classes/Task.php";
+require_once __DIR__ . "/../Repositories/UserRepository.php";
 
 if (
     !empty($_POST) &&
-    isset($_POST['useID']) &&
     isset($_POST['name']) &&
     isset($_POST['surname']) &&
     isset($_POST['email']) &&
@@ -28,7 +27,7 @@ if (
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $newUser = new User(
-        null,
+        $userID = $_SESSION['user'] ,
         $name,
         $surname,
         $email,

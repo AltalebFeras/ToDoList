@@ -36,7 +36,7 @@ if ($row) {
     // Verify password
     if (password_verify($password, $row['password'])) {
         // Password is correct, start session and redirect to treatment script
-        $_SESSION['user'] = $email;
+        $_SESSION['user'] = $row['userID'];
         $_SESSION['connected'] = true;
         header('location:../index.php');
         exit;
@@ -56,4 +56,4 @@ if ($row) {
     header('location:../index.php?error=empty_fields');
     exit;
 }
-?>
+

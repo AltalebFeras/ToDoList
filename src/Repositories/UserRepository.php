@@ -1,5 +1,5 @@
     <?php
-
+    
     require_once __DIR__ . "/../Classes/Database.php";
     require_once __DIR__ . "/../Classes/User.php";
 
@@ -7,7 +7,7 @@
     {
         public function getAll()
         {
-            $data = $this->getDb()->query('SELECT * FROM todo_user');
+            $data = $this->getDb()->query('SELECT * FROM todo_user' );
 
             $users = [];
 
@@ -26,11 +26,10 @@
             return $users;
         }
 
-        public function displayName()
+        public function getUser()
         {
-            $data = $this->getDb()->query('SELECT name FROM todo_user WHERE userID = userID');
+            $data = $this->getDb()->query('SELECT * FROM todo_user WHERE userID = userID');
             $users = [];
-
             foreach ($data as $user) {
                 $newUser = new User(
                     $user['userID'],
@@ -39,23 +38,25 @@
                     $user['email'],
                     $user['password'],
                 );
-
+                
                 $users[] = $newUser;
             }
-
+            
+            var_dump($users);
             return $users;
         }
 
         public function findById($userID)
         {
+            $_SESSION['user'] = $userID;
             $request = 'SELECT * FROM todo_user WHERE userID = :userID';
-
+        
             $query = $this->getDb()->prepare($request);
-
+        
             $query->execute([':userID' => $userID]);
-
+        
             $data = $query->fetch();
-
+        
             if ($data) {
                 $searchedUser = new User(
                     $data['userID'],
@@ -64,26 +65,76 @@
                     $data['email'],
                     $data['password']
                 );
-
+        
+                // Assigning $userID to $_SESSION['user']
+        
                 return $searchedUser;
+            }
+        }
+        
+        public function findByEmail($email)
+        {
+            try {
+                $request = 'SELECT * FROM todo_user WHERE email = :email';
+                $query = $this->getDb()->prepare($request);
+
+                $query->execute(['email' => $email]);
+
+                $user = $query->fetch(PDO::FETCH_ASSOC);
+
+                return $user ? $user : false;
+            } catch (PDOException $e) {
+                echo "Database error: " . $e->getMessage();
             }
         }
 
 
         public function create($newUser)
         {
-            $request = 'INSERT INTO todo_user (userID, name, surname, email, password)
-             VALUES (:userID, :name, :surname, :email, :password)';
-            $query = $this->getDb()->prepare($request);
+            try {
+                $existingUser = $this->findByEmail($newUser->getEmail());
 
-            $query->execute([
-                'userID' => $newUser->getUserID(),
-                'name' => $newUser->getName(),
-                'surname' => $newUser->getSurname(),
-                'email' => $newUser->getEmail(),
-                'password' => $newUser->getPassword(),
-            ]);
+                if ($existingUser) {
+                    throw new Exception("Email address already exists!");
+                }
+
+                $request = 'INSERT INTO todo_user (userID, name, surname, email, password)
+                    VALUES (:userID, :name, :surname, :email, :password)';
+                $query = $this->getDb()->prepare($request);
+
+                $query->execute([
+                    'name' => $newUser->getName(),
+                    'surname' => $newUser->getSurname(),
+                    'email' => $newUser->getEmail(),
+                    'password' => $newUser->getPassword(),
+                    'userID' => $newUser->getUserID(),
+                ]);
+
+                return $this->getDb()->lastInsertId();
+            } catch (PDOException $e) {
+                echo "Database error: " . $e->getMessage();
+            } catch (Exception $e) {
+                echo "Error: " . $e->getMessage();
+            }
         }
+
+
+        // public function create($newUser)
+        // {
+        //     $request = 'INSERT INTO todo_user (userID, name, surname, email, password)
+        //      VALUES (:userID, :name, :surname, :email, :password)';
+        //     $query = $this->getDb()->prepare($request);
+
+        //     $query->execute([
+        //         'userID' => $newUser->getUserID(),
+        //         'name' => $newUser->getName(),
+        //         'surname' => $newUser->getSurname(),
+        //         'email' => $newUser->getEmail(),
+        //         'password' => $newUser->getPassword(),
+        //     ]);
+        // }
+
+
 
         public function update($user)
         {

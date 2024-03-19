@@ -1,7 +1,9 @@
 <?php
+session_start();
 
 require_once __DIR__ . "/src/Classes/Task.php";
 require_once __DIR__ . "/src/Repositories/TaskRepository.php";
+var_dump($_SESSION);
 
 if (
     !empty($_POST) &&
@@ -19,12 +21,13 @@ if (
 
 
     $newTask = new Task(
-        $taskID,
         $taskTitle,
         $taskDescription,
         $taskDeadline,
         $taskPriority,
-        $taskCategory 
+        $taskCategory ,
+        $userTaskID,
+        $priorityID,
     );
 
     $taskRepository = new TaskRepository();
@@ -32,4 +35,5 @@ if (
     $taskRepository->create($newTask);
 
     header('Location: ./../index.php');
+    // header('Content-type: application/json');
 }
