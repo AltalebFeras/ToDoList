@@ -153,13 +153,15 @@
         }
 
         public function delete($userID)
-        {
-            $request = 'DELETE FROM todo_user WHERE userID = :userID';
+{
+    // Assuming $_SESSION['user'] holds the userID
+    $request = 'DELETE FROM todo_user WHERE userID = :userID';
 
-            $query = $this->getDb()->prepare($request);
+    $query = $this->getDB()->prepare($request);
 
-            $query->execute([
-                'userID' => $userID
-            ]);
-        }
+    $query->execute([
+        'userID' => $_SESSION['user'] 
+    ]);
+}
+
     }

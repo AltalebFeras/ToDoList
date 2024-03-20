@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once __DIR__ . "/../Classes/Task.php";
 require_once __DIR__ . "/../Repositories/UserRepository.php";
 
@@ -19,7 +19,7 @@ if (
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $newUser = new User(
-        $userID = null,
+        $userID = $_SESSION['user'],
         $name,
         $surname,
         $email,

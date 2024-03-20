@@ -12,54 +12,115 @@ myTaskNavbarButton.addEventListener("click", function () {
   sectionMyAccount.classList.add("none");
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const nameInput = document.getElementById("name");
-  const surnameInput = document.getElementById("surname");
-  const emailInput = document.getElementById("email");
-  const passwordInput = document.getElementById("password");
-  const editButton = document.getElementById("buttonEditAccount");
-  const cancelButton = document.createElement("button");
 
-  cancelButton.textContent = "Cancel";
-  cancelButton.className = "btn btn-secondary mx-2 my-2";
-  cancelButton.style.display = "none";
+document.getElementById("buttonDeleteAccount").addEventListener("click", function() {
+  if (confirm("Are you sure you want to delete your account?")) {
+      // Get the user ID from the hidden input field
+      var userID = document.getElementById("userIDInput").value;
 
-  editButton.addEventListener("click", function () {
-    nameInput.disabled = false;
-    surnameInput.disabled = false;
-    emailInput.disabled = false;
-    passwordInput.disabled = false;
-    editButton.style.display = "none";
-    saveButton.style.display = "inline-block";
-    cancelButton.style.display = "inline-block";
-  });
-
-  cancelButton.addEventListener("click", function () {
-    nameInput.disabled = true;
-    surnameInput.disabled = true;
-    emailInput.disabled = true;
-    passwordInput.disabled = true;
-    editButton.style.display = "inline-block";
-    saveButton.style.display = "none";
-    cancelButton.style.display = "none";
-  });
-
-  const saveButton = document.createElement("input");
-  saveButton.setAttribute("type", "submit");
-  saveButton.textContent = "Save";
-  saveButton.className = "btn btn-success mx-2 my-2";
-  saveButton.style.display = "none";
-
-  saveButton.addEventListener("click", function () {
-    // Trigger form submission when Save button is clicked
-    document.getElementById("formAccount").submit();
-  });
-
-  const existingSaveButton = document.getElementById("buttonSaveAccount");
-  if (existingSaveButton) {
-    existingSaveButton.remove(); // Remove duplicate button if exists
+      // Send AJAX request with user ID
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "src/treatment/deleteUser.php", true);
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+              if (xhr.status === 200) {
+                  // Success: do something if needed
+                  alert(xhr.responseText); // You can display success message if you want
+                  // Redirect user or do any other action
+                  window.location.replace("signOut.php");
+              } else {
+                  // Error handling
+                  alert('Error occurred: ' + xhr.status);
+              }
+          }
+      };
+      // Send the user ID in the request body
+      xhr.send("userID=" + encodeURIComponent(userID));
   }
+});
 
-  document.getElementById("formAccount").appendChild(saveButton);
-  document.getElementById("formAccount").appendChild(cancelButton);
+
+
+document.getElementById("buttonEditAccount").addEventListener("click", function() {
+    // Enable form fields for editing
+    document.getElementById("name").disabled = false;
+    document.getElementById("surname").disabled = false;
+    document.getElementById("email").disabled = false;
+    document.getElementById("password").disabled = false;
+
+    // Create Confirm and Cancel buttons
+    var confirmButton = document.createElement("button");
+    confirmButton.textContent = "Confirm";
+    confirmButton.className = "btn btn-primary";
+    confirmButton.id = "confirmEditButton";
+
+    var cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancel";
+    cancelButton.className = "btn btn-secondary ml-2";
+    cancelButton.id = "cancelEditButton";
+
+    // Append buttons to the form
+    var form = document.getElementById("formAccount");
+    form.appendChild(confirmButton);
+    form.appendChild(cancelButton);
+
+    // Add event listeners to the buttons
+    document.getElementById("confirmEditButton").addEventListener("click", function() {
+        // Submit the form
+        submitForm();
+    });
+
+    document.getElementById("cancelEditButton").addEventListener("click", function() {
+        // Disable form fields
+        document.getElementById("name").disabled = true;
+        document.getElementById("surname").disabled = true;
+        document.getElementById("email").disabled = true;
+        document.getElementById("password").disabled = true;
+
+        // Remove Confirm and Cancel buttons
+        confirmButton.remove();
+        cancelButton.remove();
+    });
+});
+
+function submitForm() {
+    // Get form data
+    var name = document.getElementById("name").value;
+    var surname = document.getElementById("surname").value;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+
+    // Send AJAX request to update user details
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "src/treatment/updateUser.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                // Success: do something if needed
+                alert(xhr.responseText); // You can display success message if you want
+                // Reload the page or redirect user
+                window.location.reload();
+            } else {
+                // Error handling
+                alert('Error occurred: ' + xhr.status);
+            }
+        }
+    };
+    
+    // Construct the request body
+    var formData = "name=" + encodeURIComponent(name) +
+                   "&surname=" + encodeURIComponent(surname) +
+                   "&email=" + encodeURIComponent(email) +
+                   "&password=" + encodeURIComponent(password);
+    xhr.send(formData);
+}
+
+document.getElementById("formAccount").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    
+    if (confirm("Are you sure you want to update your account?")) {
+        submitForm();
+    }
 });

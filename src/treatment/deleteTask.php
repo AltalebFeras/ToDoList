@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once __DIR__ . '/../Classes/Task.php';
 require_once __DIR__ . '/../Repositories/TaskRepository.php';
 

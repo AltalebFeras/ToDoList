@@ -2,6 +2,21 @@
     <div>
         <h2 class="py-2 fs-4 fw-bold">The smart to-do app for busy people</h2>
         <img src="./assets/images/image1.svg" class="svg pt-5" alt="svg image" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Organise your time with our app">
+
+
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
+            <div class="toast-header">
+                <strong class="mr-auto">Account Deleted</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                Your account has been successfully deleted.
+            </div>
+
+
+        </div>
     </div>
 
     <div>
