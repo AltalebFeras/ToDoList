@@ -22,8 +22,9 @@
 
     <label for="taskCategory">Category </label>
     <input id="taskCategory" type="text" name="taskCategory" required>
-
+    
     <input type="submit" name="submit" id="createTaskButton" class="btn btn-primary my-2" value="Create">
 
 </form>
+
 </div>

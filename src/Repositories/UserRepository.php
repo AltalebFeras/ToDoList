@@ -143,11 +143,11 @@
             $query = $this->getDb()->prepare($request);
 
             $query->execute([
+                'userID'=>$user->getUserID(),
                 'name' => $user->getName(),
                 'surname' => $user->getSurname(),
                 'email' => $user->getEmail(),
                 'password' => $user->getPassword(),
-                'userID' => $user->getId(),
 
             ]);
         }

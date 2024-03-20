@@ -1,11 +1,17 @@
-<?php ?>
+<?php
+
+
+?>
 <div>
 
     <h3 class="my-2 px-5 py-2 p-3 mb-2  text-dark ">My tasks</h3>
 
     <div id="listOfTasks" class="list-group ">
-        <button id="tasksField" type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#exampleModal"> <span class="badge rounded-pill bg-danger">Urgente</span>
-            The current button
+        <button id="tasksField" type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#exampleModal"> <span class="badge rounded-pill bg-danger">
+
+             
+            </span>
+            The current button<span class="badge rounded-pill bg-danger">date</span>
         </button>
 
 

@@ -19,9 +19,8 @@ $userRepository = new UserRepository();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="./assets/style.css">
-    <script src="./assets/scriptAccount.js" defer></script>
-    
-<!-- 
+
+
 
     <?php if (isset($_SESSION['connected']) && $_SESSION['connected']) { ?>
         <script src="./assets/scriptAccount.js" defer></script>
@@ -32,7 +31,7 @@ $userRepository = new UserRepository();
         </script>
     <?php } else { ?>
         <script src="./assets/scriptConnection.js" defer></script>
-    <?php } ?> -->
+    <?php } ?>
 
 
 </head>

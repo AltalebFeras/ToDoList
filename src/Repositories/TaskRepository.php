@@ -1,69 +1,27 @@
-    <?php
+<?php
 
-    require_once __DIR__ . "/../Classes/Database.php";
-    require_once __DIR__ . "/../Classes/Task.php";
+require_once __DIR__ . "/../Classes/Database.php";
+require_once __DIR__ . "/../Classes/Task.php";
 
-    class TaskRepository extends Database
+class TaskRepository extends Database
+{
+    public function create($newTask)
     {
-        public function getAll()
-        {
-            $data = $this->getDb()->query('SELECT * FROM Task');
-
-            $tasks = [];
-
-            foreach ($data as $task) {
-                $newTask = new Task(
-                    $task["taskID"],
-                    $task['taskTitle'],
-                    $task['taskDescription'],
-                    $task['taskDeadline'],
-                    $task['taskPriority'],
-                    $task['taskCategory'],
-                    $task['userTaskID'],
-                    $task['priorityID'],
-                );
-
-                $tasks[] = $newTask;
-            }
-
-            return $tasks;
-        }
-
-        public function create($newTask)
-        {
-            // Inserting the task
-            $request = 'INSERT INTO todo_task (taskID, taskTitle, taskDescription, taskDeadline, taskPriority, taskCategory , userTaskID, priorityID) VALUES ( ? , ? , ? , ?, ? , ?, ? , ?)';
-            $query = $this->getDb()->prepare($request);
-
-            $query->execute([
-                $newTask->getTaskID(),
-                $newTask->getTaskTitle(),
-                $newTask->getTaskDescription(),
-                $newTask->getTaskDeadline(),
-                $newTask->getTaskPriority(),
-                $newTask->getTaskCategory(),
-                $newTask->getUserTaskID(),
-                $newTask->getPriorityID(),
-                // Assuming you have a method to get the userID of the user who created the task
-            ]);
-
-
-            // Inserting the priority if it doesn't exist
-            $requestPriority = 'INSERT INTO todo_priority (priorityID, taskPriority)  VALUES (?,?)';
-            $queryPriority = $this->getDb()->prepare($requestPriority);
-            $queryPriority->execute([
-                $newTask->getPriorityID(),
-                $newTask->getTaskPriority()
-            ]);
-
-            // Inserting the category if it doesn't exist
-            $requestCategory = 'INSERT INTO todo_category (categoryID , taskCategory) VALUES (?,?)';
-            $queryCategory = $this->getDb()->prepare($requestCategory);
-            $queryCategory->execute([
-                $newTask->getCategoryID(),
-                $newTask->getTaskCategory()
-            ]);
-        }
+        // Inserting the task
+        $request = 'INSERT INTO todo_task (taskTitle, taskDescription, taskDeadline, taskPriority, taskCategory , userTaskID) VALUES (?, ?, ?, ?, ?, ?)';
+        $query = $this->getDb()->prepare($request);
+        // print_r($newTask);
+        // die();
+        $query->execute([
+            $newTask->getTaskTitle(),
+            $newTask->getTaskDescription(),
+            $newTask->getTaskDeadline(),
+            $newTask->getTaskPriority(),
+            $newTask->getTaskCategory(),
+            $newTask->getUserTaskID()
+        ]);
+        
+    }
 
 
         public function update($task)
@@ -82,6 +40,31 @@
 
             ]);
         }
+
+        public function displayTask()
+        {
+            $data = $this->getDb()->query('SELECT * FROM todo_task' );
+
+            $tasks = [];
+
+            foreach ($data as $task) {
+                $newTask = new Task (
+                    $task['getTaskTitle'],
+                    $task['taskDescription'],
+                    $task['taskDeadline'],
+                    $task['taskPriority'],
+                    $task['taskCategory'],
+                    $task['taskID'],
+                );
+
+                $tasks[] = $newTask;
+
+            }
+
+            return $tasks;
+             
+        }
+        
 
         public function delete($taskID)
         {

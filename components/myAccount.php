@@ -8,7 +8,8 @@ $userRepository = new UserRepository();
 <div>
     <h3 class="my-2 px-5 py-2 p-3 mb-2  text-dark ">Hello $surname</h3>
 
-    <form id="formAccount" class="d-flex flex-column bd-highlight mb-3 form-control" method="post">
+    <form id="formAccount" class="d-flex flex-column bd-highlight mb-3 form-control" method="post"
+     action="./../src/treatment/updateUser.php">
 
         <label for="name">Name :*</label>
         <input id="name" type="text" name="name" class="mb-3 mx-2" minlength="3" maxlength="50" placeholder="<?php
@@ -47,8 +48,9 @@ $userRepository = new UserRepository();
         <input id="password" type="password" name="password" class="mb-3 mx-2" minlength="7" placeholder=******* required disabled>
 
         <button id="buttonEditAccount" class="btn btn-primary my-3">Edit your account</button>
+        <input type="submit" value="submit" name="" id="">
 
-        <button id="buttonDeleteAccount" class="btn bg-danger mb-3">Delete your account
+        <button  id="buttonDeleteAccount" class="btn bg-danger mb-3">Delete your account
         </button>
 
 
