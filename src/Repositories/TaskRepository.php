@@ -22,6 +22,27 @@ class TaskRepository extends Database
         ]);
         
     }
+    public function getAllTasks()
+    {
+        $data = $this->getDB()->query('SELECT * FROM todo_task');
+
+        $tasks = [];
+
+        foreach ($data as $task) {
+            $newTask = new Task(
+                $task['taskTitle'],
+                $task['taskDescription'],
+                $task['taskDeadline'],
+                $task['taskPriority'],
+                $task['taskCategory'],
+                $task['taskID']
+            );
+
+            $tasks[] = $newTask;
+        }
+
+        return $tasks;
+    }
 
 
         public function update($task)

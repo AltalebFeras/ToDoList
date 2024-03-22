@@ -14,10 +14,9 @@
 
     <label for="taskPriority">Priority level *</label>
     <select name="taskPriority" id="taskPriority">
-        <option>Choose a level </option>
-        <option value="0"> Normale</option>
-        <option value="1">Importante</option>
-        <option value="2">Urgente</option>
+        <option value="Normale"> Normale</option>
+        <option value="Importante">Importante</option>
+        <option value="Urgente">Urgente</option>
     </select>
 
     <label for="taskCategory">Category </label>

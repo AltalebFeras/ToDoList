@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 21, 2024 at 12:30 PM
+-- Generation Time: Mar 22, 2024 at 12:50 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `todo_task` (
   UNIQUE KEY `UQ_taskID` (`taskID`),
   KEY `FK_todo_priority_TO_todo_task` (`priorityID`),
   KEY `FK_todo_user_TO_todo_task` (`userTaskID`)
-) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `todo_task`
@@ -91,7 +91,9 @@ CREATE TABLE IF NOT EXISTS `todo_task` (
 
 INSERT INTO `todo_task` (`taskID`, `taskTitle`, `taskDescription`, `taskDeadline`, `taskPriority`, `taskCategory`, `userTaskID`, `priorityID`) VALUES
 (36, 'task1', 'descriptions 1', '2024-03-21', '0', 'AZERTY', 33, 0),
-(37, 'TASK2', 'DESCRIPTION ', '2024-03-22', '1', 'QSDFG', 33, 0);
+(37, 'TASK2', 'DESCRIPTION ', '2024-03-22', '1', 'QSDFG', 33, 0),
+(38, 'razrqzza', 'zeeazeazezae', '2024-03-29', '0', 'aazeazee', 43, 0),
+(39, 'Ajouter une tache', 'AltalebAltaleb', '2024-03-30', '0', 'AltalebAltalebAltaleb', 44, 0);
 
 -- --------------------------------------------------------
 
@@ -109,14 +111,14 @@ CREATE TABLE IF NOT EXISTS `todo_user` (
   PRIMARY KEY (`userID`),
   UNIQUE KEY `UQ_userID` (`userID`),
   UNIQUE KEY `UQ_email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `todo_user`
 --
 
 INSERT INTO `todo_user` (`userID`, `name`, `surname`, `email`, `password`) VALUES
-(43, 'Feras', 'Altaleb', 'feras.altalib@gmail.com', '$2y$10$5TTBAhXFJz3YjHTkxOTETuammpoWYmCmQoIPW62biWznHb0UfA/Cu'),
+(44, 'Feras', 'Altaleb', 'feras.altalib@gmail.com', '$2y$10$12neRBuVIH9qYSebhoz.YOEPIe6CpU9uvYrE8cFK5sgldBZqR3PaG'),
 (34, 'Hararee', 'kamal', 'albarghash311994@gmail.com', '$2y$10$JyJl71UNLFh1MnO9/11tieywg9iZCvziMv4/vj75nghHymle8Si6K');
 COMMIT;
 
