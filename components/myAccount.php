@@ -54,11 +54,11 @@ $userRepository = new UserRepository();
         <label for="password">password :*</label>
         <input id="password" type="password" name="password" class="mb-3 mx-2" minlength="7" placeholder=******* required disabled>
 
-        
-        
-        
+
+
+
         <button id="buttonEditAccount" class="btn btn-primary my-3">Edit your account</button>
-        
+
         <?php
         // var_dump($users = $userRepository->getAll());
         // var_dump($_SESSION);
@@ -67,7 +67,7 @@ $userRepository = new UserRepository();
         ?>
     </form>
     <form id="deleteForm" action="" method="post">
-        <input type="hidden" name="userID" id="userIDInput" value="<?php echo $_SESSION['user']; ?>">
+        <input type="" name="userID" id="userIDInput" value="<?php echo $_SESSION['user']; ?>">
         <button type="submit" id="buttonDeleteAccount" class="btn bg-danger mb-3">Delete your account</button>
     </form>
 
