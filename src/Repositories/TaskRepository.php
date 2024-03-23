@@ -44,6 +44,21 @@ class TaskRepository extends Database
         return $tasks;
     }
 
+    
+    public function getLastTaskID()
+    {
+        $pdo = $this->getDb();
+        
+        // Query to get the maximum task ID
+        $query = "SELECT MAX(taskID) AS last_id FROM todo_task";
+
+        $statement = $pdo->prepare($query);
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result['last_id'];
+    }
 
         public function update($task)
         {

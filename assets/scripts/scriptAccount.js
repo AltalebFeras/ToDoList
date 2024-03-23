@@ -41,107 +41,6 @@ document
     }
   });
 
-// document
-//   .getElementById("buttonEditAccount")
-//   .addEventListener("click", function () {
-//     // Enable form fields for editing
-//     document.getElementById("name").disabled = false;
-//     document.getElementById("surname").disabled = false;
-//     document.getElementById("email").disabled = false;
-//     document.getElementById("password").disabled = false;
-//     document.getElementById("buttonEditAccount").disabled = true;
-
-//     // Create Confirm and Cancel buttons
-//     var confirmButton = document.createElement("input");
-//     confirmButton.textContent = "Confirm";
-//     confirmButton.className = "btn btn-primary mb-3";
-//     confirmButton.id = "confirmEditButton";
-//     confirmButton.type = "submit";
-
-//     var cancelButton = document.createElement("button");
-//     cancelButton.textContent = "Cancel";
-//     cancelButton.className = "btn btn-secondary ml-2";
-//     cancelButton.id = "cancelEditButton";
-
-//     // Append buttons to the form
-//     var form = document.getElementById("formAccount");
-//     form.appendChild(confirmButton);
-//     form.appendChild(cancelButton);
-
-//     // Add event listeners to the buttons
-//     document
-//       .getElementById("confirmEditButton")
-//       .addEventListener("click", function () {
-//         // Submit the form
-//         submitForm();
-//       });
-
-//     document
-//       .getElementById("cancelEditButton")
-//       .addEventListener("click", function () {
-//         // Disable form fields
-//         document.getElementById("name").disabled = true;
-//         document.getElementById("surname").disabled = true;
-//         document.getElementById("email").disabled = true;
-//         document.getElementById("password").disabled = true;
-//         document.getElementById("buttonEditAccount").disabled = false;
-
-//         // Remove Confirm and Cancel buttons
-//         confirmButton.remove();
-//         cancelButton.remove();
-//       });
-//   });
-
-// function submitForm() {
-//   // Get form data
-//   var name = document.getElementById("name").value;
-//   var surname = document.getElementById("surname").value;
-//   var email = document.getElementById("email").value;
-//   var password = document.getElementById("password").value;
-
-//   // Send AJAX request to update user details
-//   var xhr = new XMLHttpRequest();
-//   xhr.open("POST", "src/treatment/updateUser.php", true);
-//   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-//   xhr.onreadystatechange = function () {
-//     if (xhr.readyState === XMLHttpRequest.DONE) {
-//       if (xhr.status === 200) {
-//         // Success: do something if needed
-//         alert(xhr.responseText); // You can display success message if you want
-//         // Reload the page or redirect user
-//         window.location.reload();
-//       } else {
-//          window.location.reload();
-//       }
-//     }
-//   };
-
-//   // Construct the request body
-//   var formData =
-//     "name=" +
-//     encodeURIComponent(name) +
-//     "&surname=" +
-//     encodeURIComponent(surname) +
-//     "&email=" +
-//     encodeURIComponent(email) +
-//     "&password=" +
-//     encodeURIComponent(password);
-//   xhr.send(formData);
-// }
-
-// document
-//   .getElementById("formAccount")
-//   .addEventListener("submit", function (event) {
-//     event.preventDefault(); // Prevent the default form submission
-
-//     if (confirm("Are you sure you want to update your account?")) {
-//       submitForm();
-//     }
-//   });
-
-
-
-
 
 document.getElementById("buttonEditAccount").addEventListener("click", function () {
     enableField("name");
@@ -242,3 +141,106 @@ document.getElementById("buttonEditAccount").addEventListener("click", function 
       encodeURIComponent(password);
     xhr.send(formData);
   }
+
+
+  
+// document
+//   .getElementById("buttonEditAccount")
+//   .addEventListener("click", function () {
+//     // Enable form fields for editing
+//     document.getElementById("name").disabled = false;
+//     document.getElementById("surname").disabled = false;
+//     document.getElementById("email").disabled = false;
+//     document.getElementById("password").disabled = false;
+//     document.getElementById("buttonEditAccount").disabled = true;
+
+//     // Create Confirm and Cancel buttons
+//     var confirmButton = document.createElement("input");
+//     confirmButton.textContent = "Confirm";
+//     confirmButton.className = "btn btn-primary mb-3";
+//     confirmButton.id = "confirmEditButton";
+//     confirmButton.type = "submit";
+
+//     var cancelButton = document.createElement("button");
+//     cancelButton.textContent = "Cancel";
+//     cancelButton.className = "btn btn-secondary ml-2";
+//     cancelButton.id = "cancelEditButton";
+
+//     // Append buttons to the form
+//     var form = document.getElementById("formAccount");
+//     form.appendChild(confirmButton);
+//     form.appendChild(cancelButton);
+
+//     // Add event listeners to the buttons
+//     document
+//       .getElementById("confirmEditButton")
+//       .addEventListener("click", function () {
+//         // Submit the form
+//         submitForm();
+//       });
+
+//     document
+//       .getElementById("cancelEditButton")
+//       .addEventListener("click", function () {
+//         // Disable form fields
+//         document.getElementById("name").disabled = true;
+//         document.getElementById("surname").disabled = true;
+//         document.getElementById("email").disabled = true;
+//         document.getElementById("password").disabled = true;
+//         document.getElementById("buttonEditAccount").disabled = false;
+
+//         // Remove Confirm and Cancel buttons
+//         confirmButton.remove();
+//         cancelButton.remove();
+//       });
+//   });
+
+// function submitForm() {
+//   // Get form data
+//   var name = document.getElementById("name").value;
+//   var surname = document.getElementById("surname").value;
+//   var email = document.getElementById("email").value;
+//   var password = document.getElementById("password").value;
+
+//   // Send AJAX request to update user details
+//   var xhr = new XMLHttpRequest();
+//   xhr.open("POST", "src/treatment/updateUser.php", true);
+//   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//   xhr.onreadystatechange = function () {
+//     if (xhr.readyState === XMLHttpRequest.DONE) {
+//       if (xhr.status === 200) {
+//         // Success: do something if needed
+//         alert(xhr.responseText); // You can display success message if you want
+//         // Reload the page or redirect user
+//         window.location.reload();
+//       } else {
+//          window.location.reload();
+//       }
+//     }
+//   };
+
+//   // Construct the request body
+//   var formData =
+//     "name=" +
+//     encodeURIComponent(name) +
+//     "&surname=" +
+//     encodeURIComponent(surname) +
+//     "&email=" +
+//     encodeURIComponent(email) +
+//     "&password=" +
+//     encodeURIComponent(password);
+//   xhr.send(formData);
+// }
+
+// document
+//   .getElementById("formAccount")
+//   .addEventListener("submit", function (event) {
+//     event.preventDefault(); // Prevent the default form submission
+
+//     if (confirm("Are you sure you want to update your account?")) {
+//       submitForm();
+//     }
+//   });
+
+
+
