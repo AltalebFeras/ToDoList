@@ -14,7 +14,11 @@ if (
     $surname = htmlspecialchars($_POST['surname']);
     $email = htmlspecialchars($_POST['email']);
     $password = $_POST['password'];
-
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['error_message'] = "Invalid email format. Please enter a valid email.";
+        header('Location: ./../index.php'); // Redirect back to the index page
+        exit; 
+    }
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 

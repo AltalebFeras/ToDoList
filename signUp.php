@@ -1,3 +1,9 @@
+<?php
+
+include './components/header.php';
+
+
+?>
 <div id="sectionSignUp" class="d-flex p-4">
     <div>
         <h2 class="py-2 fs-4 fw-bold">The smart to-do app for busy people</h2>
@@ -41,7 +47,7 @@
             <input id="surname" type="text" name="surname" class="mb-3 mx-2" minlength="3" maxlength="50" placeholder="Enter your surname" required>
 
             <label for="email">Email :*</label>
-            <input id="email" type="text" name="email" class="mb-3 mx-2" minlength="3" maxlength="80" placeholder="Enter your email" required>
+            <input id="email" type="email" name="email" class="mb-3 mx-2" minlength="3" maxlength="80" placeholder="Enter your email" required>
 
             <label for="password">password :*</label>
             <input id="password" type="password" name="password" class="mb-3 mx-2" minlength="7" placeholder="Create a password" required>
@@ -53,7 +59,7 @@
 
             <div class="d-flex align-items-center" data-bs-toggle="tooltip" data-bs-placement="bottom">
                 <p>I have an account, </p>
-                <p id="buttonSignIn" class="btn btn-link">sign in</p>
+                <p id="buttonSignIn" class="btn btn-link"><a href="signIn.php">sign in</a></p>
             </div>
         </form>
     </div>

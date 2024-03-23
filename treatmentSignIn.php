@@ -13,47 +13,39 @@ if (
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Establish database connection
     $db = new Database();
-    $conn = $db->getDB(); // Corrected method name
+    $conn = $db->getDB(); 
 
-    // Prepare SQL statement to fetch user data
     $request = "SELECT * FROM todo_user WHERE email = ?";
     $stmt = $conn->prepare($request);
 
-    // Bind parameters
-    $stmt->bindValue(1, $email); // Use bindValue() instead of bind_param()
+    $stmt->bindValue(1, $email);
 
-    // Execute the prepared statement
-   // Execute the prepared statement
-$stmt->execute();
+    $stmt->execute();
 
-// Fetch the result
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Check if user exists
-if ($row) {
-    // Verify password
-    if (password_verify($password, $row['password'])) {
-        // Password is correct, start session and redirect to treatment script
-        $_SESSION['user'] = $row['userID'];
-        $_SESSION['connected'] = true;
-        header('location:../index.php');
-        exit;
+    // Check if user exists
+    if ($row) {
+        // Verify password
+        if (password_verify($password, $row['password'])) {
+            // Password is correct, start session and redirect to treatment script
+            $_SESSION['user'] = $row['userID'];
+            $_SESSION['connected'] = true;
+            header('location:../index.php');
+            exit;
+        } else {
+            $_SESSION['error_message1'] = "Invalid email or password. Please try again.";
+            header('Location: ./../signIn.php');
+            exit; // Stop further execution if password is incorrect
+        }
     } else {
-        // Password is incorrect
-        header('location:../index.php?error=password_incorrect');
-        exit;
+        $_SESSION['error_message1'] = "User not found. Please try again.";
+        header('Location: ./../signIn.php'); 
+        exit; // Stop further execution if user doesn't exist
     }
 } else {
-    // User not found
-    header('location:../index.php?error=user_not_found');
-    exit;
+    $_SESSION['error_message1'] = "Please fill in all fields.";
+    header('Location: ./../signIn.php'); 
+    exit; // Stop further execution if fields are empty
 }
-
-} else {
-    // Redirect if fields are empty
-    header('location:../index.php?error=empty_fields');
-    exit;
-}
-

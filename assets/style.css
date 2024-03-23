@@ -22,6 +22,45 @@ a:hover {
   width: 55%;
   min-height: 33%;
 }
+input:user-valid {
+  border: 2px solid green;
+}
+
+input:user-valid + span::before {
+  content: "✓";
+  color: green;
+}
+
+input:user-invalid {
+  border: 2px solid red;
+}
+
+input:user-invalid + span::before {
+  content: "✖";
+  color: red;
+}
+/* textarea {
+  resize: none;
+} */
+.none {
+  display: none !important;
+}
+#listOfTasks{
+min-width: 255px;
+}
+
+.succes {
+  display: block !important;
+  color: green;
+  background-color: #acffac;
+  border: 3px solid green;
+}
+.echec {
+  display: block !important;
+  color: red;
+  background-color: #ffacac;
+  border: 3px solid red;
+}
 
 @media screen and (max-width: 600px) {
   .d-flex {
@@ -35,32 +74,4 @@ a:hover {
   #listOfTasks{
     max-width: 300px;
     }
-}
-.none {
-  display: none !important;
-}
-/* textarea {
-  resize: none;
-} */
-#listOfTasks{
-min-width: 255px;
-}
-
-
-#message {
-width:  fit-content;
- background-color: aquamarine;
-  
-}
-.succes {
-  display: block !important;
-  color: green;
-  background-color: #acffac;
-  border: 3px solid green;
-}
-.echec {
-  display: block !important;
-  color: red;
-  background-color: #ffacac;
-  border: 3px solid red;
 }
