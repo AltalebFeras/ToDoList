@@ -20,15 +20,21 @@ class TaskRepository extends Database
             $newTask->getTaskCategory(),
             $newTask->getUserTaskID()
         ]);
-        
     }
-    public function getAllTasks()
+    public function getAllTasksForUser($userID)
     {
-        $data = $this->getDB()->query('SELECT * FROM todo_task');
-
+        $pdo = $this->getDb();
+    
+        // Query to fetch tasks for the given user
+        $query = "SELECT * FROM todo_task WHERE userTaskID = :userID";
+    
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $statement->execute();
+    
         $tasks = [];
-
-        foreach ($data as $task) {
+    
+        foreach ($statement as $task) {
             $newTask = new Task(
                 $task['taskTitle'],
                 $task['taskDescription'],
@@ -37,6 +43,68 @@ class TaskRepository extends Database
                 $task['taskCategory'],
                 $task['taskID']
             );
+    
+            $tasks[] = $newTask;
+        }
+    
+        return $tasks;
+    }
+    
+
+
+    public function getLastTaskIDForUser()
+{
+    $pdo = $this->getDb();
+
+    // Get the logged-in user's ID from the session
+    $loggedInUserID = $_SESSION['user'];
+
+    // Query to get the maximum task ID for the given user
+    $query = "SELECT MAX(taskID) AS last_id FROM todo_task WHERE userTaskID = :userID";
+
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':userID', $loggedInUserID, PDO::PARAM_INT);
+    $statement->execute();
+
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return $result['last_id'];
+}
+
+
+
+    public function update($task)
+    {
+        $request = 'UPDATE todo_task SET taskID = :taskID, getTaskTitle = :getTaskTitle, taskDescription = :taskDescription, taskDeadline = :taskDeadline, taskPriority , = :taskPriority ,taskCategory = :taskCategory  WHERE userID = :userID';
+
+        $query = $this->getDb()->prepare($request);
+
+        $query->execute([
+            'taskID' => $task->getTaskID(),
+            'getTaskTitle' => $task->getTaskTitle(),
+            'taskDescription' => $task->getTaskDescription(),
+            'taskDeadline' => $task->getTaskDeadline(),
+            'taskPriority ,' => $task->getTaskPriority(),
+            'taskCategory' => $task->getTaskCategory(),
+
+        ]);
+    }
+
+    public function displayTask()
+    {
+        $data = $this->getDb()->query('SELECT * FROM todo_task');
+
+        $tasks = [];
+
+        foreach ($data as $task) {
+            $newTask = new Task(
+                $task['getTaskTitle'],
+                $task['taskDescription'],
+                $task['taskDeadline'],
+                $task['taskPriority'],
+                $task['taskCategory'],
+                $task['taskID'],
+            );
 
             $tasks[] = $newTask;
         }
@@ -44,72 +112,15 @@ class TaskRepository extends Database
         return $tasks;
     }
 
-    
-    public function getLastTaskID()
+
+    public function delete($taskID)
     {
-        $pdo = $this->getDb();
-        
-        // Query to get the maximum task ID
-        $query = "SELECT MAX(taskID) AS last_id FROM todo_task";
+        $request = 'DELETE FROM todo_task WHERE taskID = :taskID';
 
-        $statement = $pdo->prepare($query);
-        $statement->execute();
+        $query = $this->getDb()->prepare($request);
 
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
-
-        return $result['last_id'];
+        $query->execute([
+            'taskID' => $taskID
+        ]);
     }
-
-        public function update($task)
-        {
-            $request = 'UPDATE todo_task SET taskID = :taskID, getTaskTitle = :getTaskTitle, taskDescription = :taskDescription, taskDeadline = :taskDeadline, taskPriority , = :taskPriority ,taskCategory = :taskCategory  WHERE userID = :userID';
-
-            $query = $this->getDb()->prepare($request);
-
-            $query->execute([
-                'taskID' => $task->getTaskID(),
-                'getTaskTitle' => $task->getTaskTitle(),
-                'taskDescription' => $task->getTaskDescription(),
-                'taskDeadline' => $task->getTaskDeadline(),
-                'taskPriority ,' => $task->getTaskPriority(),
-                'taskCategory' => $task->getTaskCategory(),
-
-            ]);
-        }
-
-        public function displayTask()
-        {
-            $data = $this->getDb()->query('SELECT * FROM todo_task' );
-
-            $tasks = [];
-
-            foreach ($data as $task) {
-                $newTask = new Task (
-                    $task['getTaskTitle'],
-                    $task['taskDescription'],
-                    $task['taskDeadline'],
-                    $task['taskPriority'],
-                    $task['taskCategory'],
-                    $task['taskID'],
-                );
-
-                $tasks[] = $newTask;
-
-            }
-
-            return $tasks;
-             
-        }
-        
-
-        public function delete($taskID)
-        {
-            $request = 'DELETE FROM todo_task WHERE taskID = :taskID';
-
-            $query = $this->getDb()->prepare($request);
-
-            $query->execute([
-                'taskID' => $taskID
-            ]);
-        }
-    }
+}
