@@ -18,13 +18,13 @@ $userRepository = new UserRepository();
         ?></h3>
 
     <form id="formAccount" class="d-flex flex-column bd-highlight mb-3 form-control" method="post" action="
-    ./../src/treatment/updateUser.php">
+      ./../src/treatment/updateUser.php">
 
         <div id="message">
             <?php
-            if (isset($_SESSION['error_message'])) {
-                echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error_message'] . '</div>';
-                unset($_SESSION['error_message']); // Remove the error message after displaying it
+            if (isset($_SESSION['error_message3'])) {
+                echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error_message3'] . '</div>';
+                unset($_SESSION['error_message3']); 
             }
             ?>
         </div>

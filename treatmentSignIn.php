@@ -37,15 +37,15 @@ if (
         } else {
             $_SESSION['error_message1'] = "Invalid email or password. Please try again.";
             header('Location: ./../signIn.php');
-            exit; // Stop further execution if password is incorrect
+            exit; 
         }
     } else {
         $_SESSION['error_message1'] = "User not found. Please try again.";
         header('Location: ./../signIn.php'); 
-        exit; // Stop further execution if user doesn't exist
+        exit;  
     }
 } else {
     $_SESSION['error_message1'] = "Please fill in all fields.";
     header('Location: ./../signIn.php'); 
-    exit; // Stop further execution if fields are empty
+    exit;  
 }

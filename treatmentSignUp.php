@@ -1,16 +1,14 @@
 <?php
 
-// Include necessary files
-require_once __DIR__ . "/src/Classes/User.php";
+ require_once __DIR__ . "/src/Classes/User.php";
 require_once __DIR__ . "/src/Repositories/UserRepository.php";
 
-// Start session
+ 
 session_start();
 
 // Check if form is submitted
 if (empty($_POST) || !isset($_POST['name']) || !isset($_POST['surname']) || !isset($_POST['email']) || !isset($_POST['password']) || !isset($_POST['passwordVerify'])) {
-    // If form submission is invalid, set error message and redirect to sign-up page
-    $_SESSION['error_message'] = "Invalid form submission.";
+     $_SESSION['error_message'] = "Invalid form submission.";
     header('Location: ./signUp.php');
     exit;
 }
@@ -25,7 +23,7 @@ $passwordVerify = $_POST['passwordVerify'];
 // Validate email format
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $_SESSION['error_message'] = "Invalid email format. Please enter a valid email.";
-    header('Location: ./../index.php'); // Redirect back to the index page
+    header('Location: ./../index.php');  
     exit; 
 }
 
@@ -33,7 +31,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 if ($password !== $passwordVerify) {
     $_SESSION['error_message'] = "Passwords do not match. Please try again.";
     header('Location: ./../index.php'); 
-    exit; // Stop further execution if passwords don't match
+    exit;  
 }
 
 // Check if email already exists
@@ -42,10 +40,10 @@ $existingUser = $userRepository->findByEmail($email);
 if ($existingUser) {
     $_SESSION['error_message'] = "Email already exists.";
     header('Location: ./index.php');
-    exit; // Stop further execution if email exists
+    exit;  
 }
 
-// Hash password
+ 
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 // Create new user instance

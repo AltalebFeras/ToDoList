@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 22, 2024 at 12:50 PM
+-- Generation Time: Mar 24, 2024 at 09:47 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -83,17 +83,19 @@ CREATE TABLE IF NOT EXISTS `todo_task` (
   UNIQUE KEY `UQ_taskID` (`taskID`),
   KEY `FK_todo_priority_TO_todo_task` (`priorityID`),
   KEY `FK_todo_user_TO_todo_task` (`userTaskID`)
-) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=123 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `todo_task`
 --
 
 INSERT INTO `todo_task` (`taskID`, `taskTitle`, `taskDescription`, `taskDeadline`, `taskPriority`, `taskCategory`, `userTaskID`, `priorityID`) VALUES
-(36, 'task1', 'descriptions 1', '2024-03-21', '0', 'AZERTY', 33, 0),
-(37, 'TASK2', 'DESCRIPTION ', '2024-03-22', '1', 'QSDFG', 33, 0),
-(38, 'razrqzza', 'zeeazeazezae', '2024-03-29', '0', 'aazeazee', 43, 0),
-(39, 'Ajouter une tache', 'AltalebAltaleb', '2024-03-30', '0', 'AltalebAltalebAltaleb', 44, 0);
+(97, 'GO TO THE DOCTOR', 'ASK FOR THE ANALYSIS OF MY SON.', '2024-03-25', 'Important', 'HEALTH', 55, 0),
+(99, 'finish my homework', 'write the data list.', '2024-03-25', 'Urgent', 'study', 55, 0),
+(98, 'CALL MOM', '', '2024-03-01', 'Normal', 'FAMILY', 55, 0),
+(53, 'Call manager', 'talk about the project and ask him about the last modification and detemine the deadline for this project', '2024-03-26', 'Normal', 'Work', 56, 0),
+(55, 'Finish the Todo-list', 'write the readme , arrange the folders , make final push on Git', '2024-03-24', 'Urgent', 'Work- Project', 56, 0),
+(54, 'Laundry ', 'Do the laundry  for the kids', '2024-03-25', 'Important', 'Chores', 56, 0);
 
 -- --------------------------------------------------------
 
@@ -111,15 +113,15 @@ CREATE TABLE IF NOT EXISTS `todo_user` (
   PRIMARY KEY (`userID`),
   UNIQUE KEY `UQ_userID` (`userID`),
   UNIQUE KEY `UQ_email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `todo_user`
 --
 
 INSERT INTO `todo_user` (`userID`, `name`, `surname`, `email`, `password`) VALUES
-(44, 'Feras', 'Altaleb', 'feras.altalib@gmail.com', '$2y$10$12neRBuVIH9qYSebhoz.YOEPIe6CpU9uvYrE8cFK5sgldBZqR3PaG'),
-(34, 'Hararee', 'kamal', 'albarghash311994@gmail.com', '$2y$10$JyJl71UNLFh1MnO9/11tieywg9iZCvziMv4/vj75nghHymle8Si6K');
+(55, 'Eman', 'AL BARGHASH', 'eman.albarghash311994@gmail.com', '$2y$10$V7eelX4GZItu8Fhkh/do6.oq9UJgJi7Ws/bMtE/.2HEC1Jk9fXYD.'),
+(56, 'Feras', 'Altaleb', 'feras.altalib@gmail.com', '$2y$10$v45A5zkot1yxRKhWdbxN3OV6bk0CMlvqIwJ1sH6N9gAEnpDkjFddi');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,5 +1,4 @@
 <div id="navbar" class="mt-5" >
-    <!-- Just change if ($_SESSION['connected'])  to be ok -->
     <?php if ($_SESSION['connected']) { ?>
 
 

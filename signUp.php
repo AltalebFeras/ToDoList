@@ -29,12 +29,11 @@ include './components/header.php';
         <h3 class="my-2 px-5 py-2 p-3 mb-2 text-dark">Sign Up</h3>
 
         <form id="formSignUp" class="d-flex flex-column bd-highlight mb-3 form-control" method="post" action="treatmentSignUp.php">
-            <!-- <div id="message"></div> -->
-            <div id="message">
+             <div id="message">
                 <?php
                 if (isset($_SESSION['error_message'])) {
                     echo '<div class="alert alert-danger" role="alert">' . $_SESSION['error_message'] . '</div>';
-                    unset($_SESSION['error_message']); // Remove the error message after displaying it
+                    unset($_SESSION['error_message']);  
                 }
                 ?>
             </div>
@@ -64,7 +63,3 @@ include './components/header.php';
         </form>
     </div>
 </div>
-
-<script>
-
-</script>

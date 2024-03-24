@@ -23,12 +23,11 @@ document
       xhr.onreadystatechange = function () {
         if (xhr.readyState === XMLHttpRequest.DONE) {
           if (xhr.status === 200) {
-            // Success: do something if needed
-            alert(xhr.responseText); // You can display success message if you want
+            alert(xhr.responseText); 
             // Redirect user or do any other action
             window.location.replace("signOut.php");
           } else {
-            // Error handling
+           
             alert("Error occurred: " + xhr.status);
           }
         }
@@ -69,7 +68,7 @@ document
     form.appendChild(confirmButton);
     form.appendChild(cancelButton);
 
-    // Add event listeners to the buttons
+    
     document
       .getElementById("confirmEditButton")
       .addEventListener("click", function () {
@@ -118,7 +117,7 @@ function validateInputs() {
 }
 
 function submitForm() {
-  // Get form data
+
   var name = document.getElementById("name").value;
   var surname = document.getElementById("surname").value;
   var email = document.getElementById("email").value;
@@ -131,9 +130,7 @@ function submitForm() {
   xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
-        // Success: do something if needed
-        alert(xhr.responseText); // You can display success message if you want
-        // Reload the page or redirect user
+        alert(xhr.responseText); 
         window.location.reload();
       } else {
         window.location.reload();
@@ -153,30 +150,28 @@ function submitForm() {
     encodeURIComponent(password);
   xhr.send(formData);
 }
+
 // ********************************************************************************************
 
 document.getElementById("buttonDeleteTask").addEventListener("click", function (event) {
-  if (confirm("Are you sure you want to delete your task?")) {
-      var taskTitle = document.getElementById("taskIDInput").value;
-      var taskDeadline = document.getElementById("taskDeadlineInput").value;
-      var taskPriority = document.getElementById("taskPriorityInput").value;
+  var taskTitle = document.getElementById("taskIDInput").value;
+  var taskDeadline = document.getElementById("taskDeadlineInput").value;
+  var taskPriority = document.getElementById("taskPriorityInput").value;
 
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "src/treatment/deleteTask.php", true);
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      xhr.onreadystatechange = function () {
-          if (xhr.readyState === XMLHttpRequest.DONE) {
-              if (xhr.status === 200) {
-                  alert(xhr.responseText);
-                  window.location.replace("index.php");
-              } else {
-                  alert("Error occurred: " + xhr.status);
-              }
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "src/treatment/deleteTask.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+              window.location.replace("index.php");
+          } else {
+              console.error("Error occurred: " + xhr.status);
           }
-      };
-      xhr.send("taskTitle=" + encodeURIComponent(taskTitle) + "&taskDeadline=" + encodeURIComponent(taskDeadline) + "&taskPriority=" + encodeURIComponent(taskPriority));
-  } else {
-      event.preventDefault();
-      alert("Task deletion canceled.");
-  }
+      }
+  };
+  xhr.send("taskTitle=" + encodeURIComponent(taskTitle) + "&taskDeadline=" + encodeURIComponent(taskDeadline) + "&taskPriority=" + encodeURIComponent(taskPriority));
+
+  // Prevent the default action of the button (e.g., form submission)
+  event.preventDefault();
 });

@@ -40,16 +40,16 @@ input:user-invalid + span::before {
   content: "✖";
   color: red;
 }
-/* textarea {
-  resize: none;
-} */
+
 .none {
   display: none !important;
 }
 #listOfTasks {
   min-width: 255px;
 }
-
+#dateBold {
+  font-weight: bold;
+}
 .succes {
   display: block !important;
   color: green;

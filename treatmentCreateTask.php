@@ -35,5 +35,4 @@ if (
     $taskRepository->create($newTask);
 
     header('Location: ./../index.php');
-    // header('Content-type: application/json');
-}
+ }
