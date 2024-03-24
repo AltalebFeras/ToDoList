@@ -5,11 +5,16 @@ require_once __DIR__ . '/../Repositories/TaskRepository.php';
 
 if (
     !empty($_POST) &&
-    isset($_POST['taskID'])
+    isset($_POST['taskTitle']) &&
+    isset($_POST['taskDeadline']) &&
+    isset($_POST['taskPriority'])
 ) {
-    $taskID = htmlspecialchars($_POST['taskID']);
+    $taskTitle = htmlspecialchars($_POST['taskTitle']);
+    $taskDeadline = htmlspecialchars($_POST['taskDeadline']);
+    $taskPriority = htmlspecialchars($_POST['taskPriority']);
 
     $taskRepository = new TaskRepository();
 
-    $taskRepository->delete($taskID);
+    $taskRepository->delete($taskTitle, $taskDeadline, $taskPriority);
 }
+?>

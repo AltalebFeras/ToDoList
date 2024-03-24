@@ -61,7 +61,9 @@ $lastTaskID = $lastTaskIDForUser ? $lastTaskIDForUser : 0;
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <form id="deleteFormTask" action="" method="post">
-                                <input type=" " name="taskID" id="taskIDInput" value="<?php echo $_SESSION['user']; ?>">
+                                <input type="hidden" name="taskTitle" id="taskIDInput" value="<?= $task->getTaskTitle() ?>">
+                                <input type="hidden" name="taskDeadline" id="taskDeadlineInput" value="<?= $task->getTaskDeadline() ?>">
+                                <input type="hidden" name="taskPriority" id="taskPriorityInput" value="<?= $task->getTaskPriority() ?>">
                                 <button type="submit" id="buttonDeleteTask" class="btn bg-danger">Confirme</button>
                             </form>
                         </div>

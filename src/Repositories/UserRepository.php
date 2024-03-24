@@ -152,16 +152,24 @@
             ]);
         }
 
-        public function delete($userID)
+
+public function delete($userID)
 {
-    // Assuming $_SESSION['user'] holds the userID
-    $request = 'DELETE FROM todo_user WHERE userID = :userID';
+    $request = 'DELETE FROM todo_task WHERE userTaskID = :userID; DELETE FROM todo_user WHERE userID = :userID';
 
     $query = $this->getDB()->prepare($request);
 
     $query->execute([
         'userID' => $_SESSION['user'] 
+
     ]);
+
+    // Check if any rows were affected by the delete operation
+    if ($query->rowCount() > 0) {
+        return true; // User and tasks deleted successfully
+    } else {
+        return false; // User not found or not deleted
+    }
 }
 
     }

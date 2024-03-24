@@ -72,6 +72,8 @@ class TaskRepository extends Database
     }
 
 
+    
+
    public function update($task)
 {
     $request = 'UPDATE todo_task SET taskID = :taskID, taskTitle = :taskTitle, taskDescription = :taskDescription,
@@ -90,14 +92,24 @@ class TaskRepository extends Database
     ]);
 }
 
-    public function delete($taskID)
-    {
-        $request = 'DELETE FROM todo_task WHERE taskID = :taskID';
+public function delete($taskTitle, $taskDeadline, $taskPriority)
+{
+    $request = 'DELETE FROM todo_task WHERE taskTitle = :taskTitle AND taskDeadline = :taskDeadline AND taskPriority = :taskPriority';
 
-        $query = $this->getDb()->prepare($request);
+    $query = $this->getDb()->prepare($request);
 
-        $query->execute([
-            'taskID' => $taskID
-        ]);
+    $query->execute([
+        'taskTitle' => $taskTitle,
+        'taskDeadline' => $taskDeadline,
+        'taskPriority' => $taskPriority
+    ]);
+
+    // Check if any rows were affected by the delete operation
+    if ($query->rowCount() > 0) {
+        return true; // Task deleted successfully
+    } else {
+        return false; // Task not found or not deleted
     }
+}
+
 }
