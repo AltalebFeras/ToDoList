@@ -7,7 +7,7 @@ $taskRepository = new TaskRepository();
 $loggedInUserID = $_SESSION['user'];
 
 // Assuming $loggedInUserID holds the ID of the logged-in user
-$lastTaskIDForUser = $taskRepository->getLastTaskIDForUser($loggedInUserID);
+$lastTaskIDForUser = $taskRepository->getLastTaskIDForUser();
 
 // Fetch tasks belonging to the logged-in user
 $tasks = $taskRepository->getAllTasksForUser($loggedInUserID);
@@ -23,10 +23,24 @@ $lastTaskID = $lastTaskIDForUser ? $lastTaskIDForUser : 0;
         <?php foreach ($tasks as $task) {
             $lastTaskID++; // Increment lastTaskID for each new task
         ?>
-            <button type="button" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $lastTaskID ?>">
-                <span class="badge rounded-pill bg-danger"><?= $task->getTaskPriority() ?></span>
-                <?= $task->getTaskTitle() ?>
-                <span class="badge rounded-pill bg-danger"><?= $task->getTaskDeadline() ?></span>
+            <button id="taskDisplayed" type="button" class="list-group-item list-group-item-action mb-2 custom-class d-inline-flex" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $lastTaskID ?>">
+
+                <span class="" data-bs-toggle="tooltip" data-bs-placement="bottom" title=" Task's Title"><?= $task->getTaskTitle() ?></span>
+                <span class="  mx-3" data-bs-toggle="tooltip" data-bs-placement="bottom" title=" Task's Deadline"><?= $task->getTaskDeadline() ?></span>
+                <span class="badge rounded-pill 
+    <?php
+            $priority = $task->getTaskPriority();
+            if ($priority === 'Normal') {
+                echo 'bg-info';
+            } elseif ($priority === 'Important') {
+                echo 'bg-warning';
+            } elseif ($priority === 'Urgent') {
+                echo 'bg-danger';
+            }
+    ?>" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Task's Priority">
+                    <?= $priority ?>
+                </span>
+
             </button>
 
             <!-- Modal -->
@@ -34,7 +48,7 @@ $lastTaskID = $lastTaskIDForUser ? $lastTaskIDForUser : 0;
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit your task</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Delete your task</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -44,7 +58,13 @@ $lastTaskID = $lastTaskIDForUser ? $lastTaskIDForUser : 0;
                             <p>Priority: <?= $task->getTaskPriority() ?></p>
                             <p>Category: <?= $task->getTaskCategory() ?></p>
                         </div>
-
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <form id="deleteFormTask" action="" method="post">
+                                <input type=" " name="taskID" id="taskIDInput" value="<?php echo $_SESSION['user']; ?>">
+                                <button type="submit" id="buttonDeleteTask" class="btn bg-danger">Confirme</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

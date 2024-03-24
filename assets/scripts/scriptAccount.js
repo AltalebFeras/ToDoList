@@ -12,34 +12,38 @@ myTaskNavbarButton.addEventListener("click", function () {
   sectionMyAccount.classList.add("none");
 });
 
-document
-  .getElementById("buttonDeleteAccount")
-  .addEventListener("click", function () {
-    if (confirm("Are you sure you want to delete your account?")) {
-      // Get the user ID from the hidden input field
-      var userID = document.getElementById("userIDInput").value;
+document.getElementById("buttonDeleteAccount").addEventListener("click", function (event) {
+  if (confirm("Are you sure you want to delete your account?")) {
+    // Get the user ID from the hidden input field
+    var userID = document.getElementById("userIDInput").value;
 
-      // Send AJAX request with user ID
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "src/treatment/deleteUser.php", true);
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
-            // Success: do something if needed
-            alert(xhr.responseText); // You can display success message if you want
-            // Redirect user or do any other action
-            window.location.replace("signOut.php");
-          } else {
-            // Error handling
-            alert("Error occurred: " + xhr.status);
-          }
+    // Send AJAX request with user ID
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "src/treatment/deleteUser.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          // Success: do something if needed
+          alert(xhr.responseText); // You can display success message if you want
+          // Redirect user or do any other action
+          window.location.replace("signOut.php");
+        } else {
+          // Error handling
+          alert("Error occurred: " + xhr.status);
         }
-      };
-      // Send the user ID in the request body
-      xhr.send("userID=" + encodeURIComponent(userID));
-    }
-  });
+      }
+    };
+    // Send the user ID in the request body
+    xhr.send("userID=" + encodeURIComponent(userID));
+  } else {
+    // Prevent the default action of the button click event
+    event.preventDefault();
+    // User clicked cancel, do nothing or provide feedback
+    alert("Account deletion canceled.");
+  }
+});
+
 
 
 document.getElementById("buttonEditAccount").addEventListener("click", function () {

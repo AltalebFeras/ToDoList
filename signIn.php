@@ -5,7 +5,7 @@ include './components/header.php';
 
 ?>
 
-<div id="sectionSignIn" class="d-flex p-4">
+<div id="sectionSignIn" class="d-flex align-items-center justify-content-between  p-4">
   <div>
     <h2 class=" py-2  fs-4 fw-bold">The smart to-do app for busy people</h2>
     <img src="./assets/images/image2.svg" class="svg pt-5" alt="svg image" data-bs-toggle="tooltip" data-bs-placement="bottom" title="create your tasks">
