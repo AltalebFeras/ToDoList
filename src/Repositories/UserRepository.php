@@ -155,7 +155,8 @@
 
 public function delete($userID)
 {
-    $request = 'DELETE FROM todo_task WHERE userTaskID = :userID; DELETE FROM todo_user WHERE userID = :userID';
+    $request = 'DELETE FROM todo_task WHERE userTaskID = :userID;
+     DELETE FROM todo_user WHERE userID = :userID';
 
     $query = $this->getDB()->prepare($request);
 

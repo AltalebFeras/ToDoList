@@ -14,15 +14,16 @@ a {
 #createNewTaskForm {
   width: fit-content;
 }
+.svg {
+  width: 55%;
+  min-height: 33%;
+}
 
 input:hover,
 a:hover {
   background-color: #ffcccc;
 }
-.svg {
-  width: 55%;
-  min-height: 33%;
-}
+
 input:user-valid {
   border: 2px solid green;
 }
